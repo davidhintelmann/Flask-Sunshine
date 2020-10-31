@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if query is not none %}
+      <div>
+        <p><b>{{ query }}</b></p>
+        <br>
+        <p><b>{{ query.label}}</b></p>
+      </div>
+    {% elif salary is none %}
+        <p><b>NOTHING, FIX</b></p>
+    {% endif %}
+{% endblock %}
