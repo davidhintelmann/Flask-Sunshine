@@ -1,7 +1,7 @@
 import psycopg2
 params_dic = {
   "port":"5432",
-  "database":"statscan",
+  "dbname":"statscan",
   "user":"postgres",
   "password":"PoBuCe60"
 }
@@ -12,6 +12,7 @@ def create_tables():
         """
         CREATE TABLE sunshine
         (
+          id bigint,
           sector VARCHAR(56),
           last_name VARCHAR(26),
           first_name VARCHAR(25),
@@ -46,21 +47,12 @@ if __name__ == '__main__':
 
     conn = psycopg2.connect(**params_dic)
     cur = conn.cursor()
-    #cur.execute('SELECT salary FROM sunshine')
-    #all_ = cur.fetchall()
-    #one = cur.fetchone()
-    #conn.commit()
-    #print(all_, one)
 
-    #csv_file = open('data/2019.csv', 'r')
-
-    with open('data/2019_second.csv', 'r') as f:
-        #next(f) # Skip the header row.
-        #f , <database name>, Comma-Seperated
-        cur.copy_from(f, table='sunshine', sep='|')
-        #Commit Changes
+    with open('data/2019.csv', 'r') as file:
+        next(file) # Skip the header row.
+        cur.copy_from(file, table='sunshine', sep='|')
+        #Commit Changes and close connection
         conn.commit()
-        #Close connection
         conn.close()
 
     """

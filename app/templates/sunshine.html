@@ -5,9 +5,13 @@
       <div>
         <p><b>{{ query }}</b></p>
         <br>
-        <p><b>{{ query.label}}</b></p>
+        <p><b>{{ query.sector}}</b></p>
       </div>
-    {% elif salary is none %}
-        <p><b>NOTHING, FIX</b></p>
+    {% else %}
+        <p><b>Query Empty, please contact davidhin@mac.com with information on bug encountered.</b></p>
     {% endif %}
+    <div>
+      <canvas id="myChart" width="800" height="400"></canvas>
+      <script type="text/javascript" src="{{ url_for('static', filename = 'js/basicBarChar.js') }}"></script>
+    </div>
 {% endblock %}

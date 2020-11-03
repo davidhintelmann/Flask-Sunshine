@@ -16,14 +16,21 @@ class Sunshine(db.Model):
     sector = db.Column(db.String(56), index=True)
     last_name = db.Column(db.String(26), index=True)
     first_name = db.Column(db.String(25), index=True)
-    salary = db.Column(db.Integer, index=True)
-    taxable = db.Column(db.Integer, index=True)
+    salary = db.Column(db.DECIMAL(asdecimal=False), index=True)
+    taxable = db.Column(db.DECIMAL(asdecimal=False), index=True)
     employer = db.Column(db.String(193))
     job_title = db.Column(db.String(300))
-    year = db.Column(db.Integer, index=True)
+    calendar_year = db.Column(db.Integer, index=True)
+
+    """
+    def __init__(self, first_name, last_name, salary):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.salary = salary
+    """
 
     def __repr__(self):
-        return '<id {}>'.format(self.id)
+        return "<Sunshine(first_name={}, last_name={}, employer={})>".format(self.first_name, self.last_name, self.employer)
 
 """
 class Post(db.Model):
@@ -38,6 +45,7 @@ class Post(db.Model):
 
 
 """
+id bigint,
 sector VARCHAR(56),
 last_name VARCHAR(26),
 first_name VARCHAR(25),
